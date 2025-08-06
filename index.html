@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>PPDB Sederhana</title>
+  <link rel="icon" type="image/png" href="https://img.icons8.com/color/48/000000/school-building.png">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -37,6 +38,19 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
+    .main-illustration {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+    .main-illustration img {
+      width: 90px;
+      height: 90px;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(33,150,243,0.13);
+      object-fit: cover;
+      background: #e3f2fd;
+    }
     input, select, button {
       font-family: 'Montserrat', Arial, sans-serif;
       font-size: 15px;
@@ -63,6 +77,15 @@
       box-shadow: 0 2px 8px rgba(33, 150, 243, 0.08);
       transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
       letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      justify-content: center;
+    }
+    button .btn-icon {
+      font-size: 18px;
+      margin-right: 2px;
+      vertical-align: middle;
     }
     button:hover {
       background: linear-gradient(90deg, #1976d2 60%, #43a047 100%);
@@ -138,6 +161,13 @@
       font-weight: bold;
       box-shadow: 0 2px 8px rgba(33, 150, 243, 0.13);
     }
+    .brand-logo img {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      vertical-align: middle;
+      margin-right: 0;
+    }
     .brand-title {
       font-size: 22px;
       font-weight: 700;
@@ -157,11 +187,16 @@
 <body>
 <div class="container" id="loginPage">
   <div class="brand">
-    <div class="brand-logo">PP</div>
+    <div class="brand-logo">
+      <img src="https://img.icons8.com/color/48/000000/school-building.png" alt="logo sekolah">
+    </div>
     <div class="brand-title">PPDB Online</div>
   </div>
-  <button onclick="showPage('registerPage')">Registrasi</button>
-  <button onclick="showPage('loginFormPage')">Login</button>
+  <div class="main-illustration">
+    <img src="https://img.freepik.com/free-vector/flat-design-school-building-illustration_23-2148165842.jpg?w=400" alt="Ilustrasi Sekolah">
+  </div>
+  <button onclick="showPage('registerPage')"><span class="btn-icon">📝</span>Registrasi</button>
+  <button onclick="showPage('loginFormPage')"><span class="btn-icon">🔑</span>Login</button>
 </div>
 
 <div class="container hidden" id="registerPage">
@@ -170,8 +205,8 @@
   <input type="text" id="regUsername" placeholder="Username">
   <label for="regPassword">Password</label>
   <input type="password" id="regPassword" placeholder="Password">
-  <button onclick="register()">Simpan & Masuk</button>
-  <button onclick="showPage('loginPage')">Kembali</button>
+  <button onclick="register()"><span class="btn-icon">💾</span>Simpan & Masuk</button>
+  <button onclick="showPage('loginPage')"><span class="btn-icon">🔙</span>Kembali</button>
 </div>
 
 <div class="container hidden" id="loginFormPage">
@@ -180,18 +215,21 @@
   <input type="text" id="loginUsername" placeholder="Username">
   <label for="loginPassword">Password</label>
   <input type="password" id="loginPassword" placeholder="Password">
-  <button onclick="login()">Login</button>
-  <button onclick="showPage('loginPage')">Kembali</button>
+  <button onclick="login()"><span class="btn-icon">🔓</span>Login</button>
+  <button onclick="showPage('loginPage')"><span class="btn-icon">🔙</span>Kembali</button>
   <div id="loginError" class="error"></div>
 </div>
 
 <div class="container hidden" id="mainPage">
   <h2>Halaman Utama</h2>
+  <div class="main-illustration">
+    <img src="https://img.icons8.com/color/96/000000/graduation-cap.png" alt="Graduation Cap">
+  </div>
   <div class="info">
     Selamat datang di <b>PPDB Online</b>! Silakan cek info pendaftaran atau logout.
   </div>
-  <button onclick="showPage('infoPage')">Info Pendaftaran</button>
-  <button onclick="logout()">Logout</button>
+  <button onclick="showPage('infoPage')"><span class="btn-icon">ℹ️</span>Info Pendaftaran</button>
+  <button onclick="logout()"><span class="btn-icon">🚪</span>Logout</button>
 </div>
 
 <div class="container hidden" id="infoPage">
@@ -202,8 +240,8 @@
     <li>Biaya jurusan IPA: <b>Rp 1.000.000</b></li>
     <li>Biaya jurusan IPS: <b>Rp 900.000</b></li>
   </ul>
-  <button onclick="showPage('formPage')">Formulir Pendaftaran</button>
-  <button onclick="showPage('mainPage')">Kembali</button>
+  <button onclick="showPage('formPage')"><span class="btn-icon">📝</span>Formulir Pendaftaran</button>
+  <button onclick="showPage('mainPage')"><span class="btn-icon">🔙</span>Kembali</button>
 </div>
 
 <div class="container hidden" id="formPage">
@@ -249,8 +287,8 @@
     <option value="IPA">IPA</option>
     <option value="IPS">IPS</option>
   </select>
-  <button onclick="lanjutForm()">Lanjut</button>
-  <button onclick="showPage('infoPage')">Kembali</button>
+  <button onclick="lanjutForm()"><span class="btn-icon">➡️</span>Lanjut</button>
+  <button onclick="showPage('infoPage')"><span class="btn-icon">🔙</span>Kembali</button>
 </div>
 
 <div class="container hidden" id="confirmPage">
@@ -272,30 +310,32 @@
     <li><b>NISN:</b> <span id="cNISN"></span></li>
     <li><b>Jurusan:</b> <span id="cJurusan"></span></li>
   </ul>
-  <button onclick="verifikasi()">Verifikasi</button>
-  <button onclick="kembaliForm()">Kembali</button>
+  <button onclick="verifikasi()"><span class="btn-icon">✅</span>Verifikasi</button>
+  <button onclick="kembaliForm()"><span class="btn-icon">🔙</span>Kembali</button>
 </div>
 
 <div class="container hidden" id="resultPage">
   <h2>Pendaftaran Berhasil!</h2>
   <div class="success">Terima kasih telah mendaftar.<br>Silakan cek pengumuman penerimaan.</div>
-  <button onclick="showPage('pengumumanPage')">Cek Pengumuman</button>
+  <button onclick="showPage('pengumumanPage')"><span class="btn-icon">📢</span>Cek Pengumuman</button>
 </div>
 
 <div class="container hidden" id="pengumumanPage">
   <h2>Pengumuman</h2>
   <div class="success">Selamat! Calon siswa diterima.</div>
-  <button onclick="resetForm()">Kembali ke Halaman Utama</button>
+  <button onclick="resetForm()"><span class="btn-icon">🏠</span>Kembali ke Halaman Utama</button>
 </div>
 
 <div class="footer">
-  &copy; 2024 PPDB Online | Design by <span style="color:#ff9800;font-weight:600;">You</span>
+  &copy; 2025 PPDB Online | Kelas Khusus <span style="color:#ff9800;font-weight:600;">IMK</span>
 </div>
 
 <script>
 function showPage(id) {
   document.querySelectorAll('.container').forEach(c => c.classList.add('hidden'));
   document.getElementById(id).classList.remove('hidden');
+  // Bersihkan pesan error saat berpindah ke halaman login/registrasi
+  if (id === 'loginFormPage') document.getElementById('loginError').innerText = '';
 }
 
 // Simulasi penyimpanan user
@@ -309,6 +349,10 @@ function register() {
     alert('Username dan password harus diisi!');
     return;
   }
+  if (username === password) {
+    alert('Username dan password tidak boleh sama!');
+    return;
+  }
   user.username = username;
   user.password = password;
   showPage('mainPage');
@@ -317,6 +361,10 @@ function register() {
 function login() {
   const username = document.getElementById('loginUsername').value.trim();
   const password = document.getElementById('loginPassword').value.trim();
+  if (!username || !password) {
+    document.getElementById('loginError').innerText = 'Username dan password harus diisi!';
+    return;
+  }
   if (username === user.username && password === user.password) {
     document.getElementById('loginError').innerText = '';
     showPage('mainPage');
