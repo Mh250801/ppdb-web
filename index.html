@@ -1,227 +1,192 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PPDB Online</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f4f6f8;
-      color: #333;
-    }
-    header {
-      background-color: #1a73e8;
-      color: white;
-      padding: 1rem;
-      text-align: center;
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      background-color: #e0e0e0;
-      padding: 10px;
-      gap: 10px;
-    }
-    nav button {
-      background-color: #ffffff;
-      border: 1px solid #ccc;
-      padding: 10px 20px;
-      cursor: pointer;
-      border-radius: 5px;
-      transition: background-color 0.3s;
-    }
-    nav button:hover {
-      background-color: #d3e3fc;
-    }
-    section {
-      padding: 20px;
-      display: none;
-    }
-    .active {
-      display: block;
-    }
-    .form-group {
-      margin-bottom: 15px;
-    }
-    .form-group label {
-      display: block;
-      margin-bottom: 6px;
-    }
-    .form-group input, .form-group select {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    .btn-submit {
-      background-color: #1a73e8;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .btn-submit:hover {
-      background-color: #0f5fd1;
-    }
-    .katalog {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-    .gelombang {
-      background-color: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      flex: 1;
-      min-width: 300px;
-    }
-    .gelombang h3 {
-      margin-bottom: 10px;
-    }
-    .closed {
-      color: red;
-      font-weight: bold;
-    }
-    .open {
-      color: green;
-      font-weight: bold;
-    }
-    #loginPage {
-      display: block;
-      padding: 50px 20px;
-      max-width: 400px;
-      margin: auto;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPDB Online</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f8;
+            color: #333;
+        }
+        header {
+            background-color: #005b96;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #003f63;
+        }
+        nav button {
+            background: none;
+            border: none;
+            color: white;
+            padding: 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        nav button:hover {
+            background-color: #004b80;
+        }
+        section {
+            display: none;
+            padding: 2rem;
+        }
+        section.active {
+            display: block;
+        }
+        .katalog {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        .kartu {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            flex: 1 1 300px;
+        }
+        .closed {
+            color: red;
+            font-weight: bold;
+        }
+        .open {
+            color: green;
+            font-weight: bold;
+        }
+        form input, form select {
+            width: 100%;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        form button {
+            background-color: #005b96;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #004b80;
+        }
+        #loginPage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #e8eef3;
+        }
+        #loginForm {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+    </style>
 </head>
 <body>
 
-  <section id="loginPage">
-    <h2>Login PPDB</h2>
-    <div class="form-group">
-      <label for="username">Username</label>
-      <input type="text" id="username">
-    </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" id="password">
-    </div>
-    <button class="btn-submit" onclick="login()">Login</button>
-  </section>
+<div id="loginPage">
+    <form id="loginForm">
+        <h2>Login Admin PPDB</h2>
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button type="submit">Masuk</button>
+    </form>
+</div>
 
-  <div id="mainApp" style="display:none;">
-    <header>PPDB Online - SMK Contoh</header>
+<div id="mainContent" style="display:none">
+    <header>
+        <h1>PPDB Online 2025 - SMK Negeri Contoh</h1>
+    </header>
+
     <nav>
-      <button onclick="showPage('home')">Beranda</button>
-      <button onclick="showPage('info')">Info</button>
-      <button onclick="showPage('register')">Registrasi</button>
-      <button onclick="showPage('result')">Hasil</button>
-      <button onclick="logout()">Logout</button>
+        <button onclick="showPage('home')">Beranda</button>
+        <button onclick="showPage('info')">Informasi</button>
+        <button onclick="showPage('register')">Registrasi</button>
+        <button onclick="showPage('result')">Hasil</button>
     </nav>
 
     <section id="home" class="active">
-      <h2>Selamat Datang di PPDB Online</h2>
-      <p>Silakan pilih menu di atas untuk mulai menggunakan aplikasi ini.</p>
+        <h2>Selamat Datang di Portal PPDB Online</h2>
+        <p>Portal Penerimaan Peserta Didik Baru (PPDB) Online SMK Negeri Contoh tahun ajaran 2025/2026.</p>
+        <p>Silakan gunakan menu di atas untuk mendapatkan informasi, melakukan pendaftaran, dan melihat hasil seleksi.</p>
     </section>
 
     <section id="info">
-      <h2>Informasi Pendaftaran</h2>
-      <div class="katalog">
-        <div class="gelombang">
-          <h3>Gelombang 1</h3>
-          <p>Pendaftaran: 1 - 15 Juli 2025</p>
-          <p class="closed">Status: Ditutup</p>
+        <h2>Informasi Gelombang Pendaftaran</h2>
+        <div class="katalog">
+            <div class="kartu">
+                <h3>Gelombang 1</h3>
+                <p class="closed">Status: Ditutup</p>
+                <p>Periode: 1 Juni - 15 Juni 2025</p>
+                <p>Keterangan: Pendaftaran gelombang pertama telah selesai. Silakan cek hasil seleksi di menu "Hasil".</p>
+            </div>
+            <div class="kartu">
+                <h3>Gelombang 2</h3>
+                <p class="open">Status: Dibuka</p>
+                <p>Periode: 20 Juni - 5 Juli 2025</p>
+                <p>Keterangan: Silakan lakukan pendaftaran dengan mengisi formulir pada menu "Registrasi" sebelum 5 Juli 2025.</p>
+            </div>
         </div>
-        <div class="gelombang">
-          <h3>Gelombang 2</h3>
-          <p>Pendaftaran: 16 - 31 Juli 2025</p>
-          <p class="open">Status: Dibuka</p>
-        </div>
-      </div>
     </section>
 
     <section id="register">
-      <h2>Formulir Registrasi</h2>
-      <div class="form-group">
-        <label for="nama">Nama Lengkap</label>
-        <input type="text" id="nama">
-      </div>
-      <div class="form-group">
-        <label for="nisn">NISN</label>
-        <input type="text" id="nisn">
-      </div>
-      <div class="form-group">
-        <label for="jurusan">Jurusan Pilihan</label>
-        <select id="jurusan">
-          <option value="TKJ">TKJ</option>
-          <option value="RPL">RPL</option>
-          <option value="MM">MM</option>
-        </select>
-      </div>
-      <button class="btn-submit" onclick="submitForm()">Kirim</button>
+        <h2>Formulir Pendaftaran</h2>
+        <form id="formRegister">
+            <input type="text" placeholder="Nama Lengkap" required>
+            <input type="text" placeholder="NISN" required>
+            <input type="text" placeholder="Asal Sekolah" required>
+            <select required>
+                <option value="">Pilih Jurusan</option>
+                <option value="TKJ">Teknik Komputer Jaringan</option>
+                <option value="RPL">Rekayasa Perangkat Lunak</option>
+                <option value="AKL">Akuntansi</option>
+            </select>
+            <input type="tel" placeholder="Nomor Telepon" required>
+            <input type="email" placeholder="Email" required>
+            <button type="submit">Daftar Sekarang</button>
+        </form>
     </section>
 
     <section id="result">
-      <h2>Hasil Pendaftaran</h2>
-      <p id="hasilPendaftaran">Belum ada data pendaftaran.</p>
+        <h2>Hasil Seleksi</h2>
+        <p>Masukkan NISN Anda untuk mengecek hasil seleksi:</p>
+        <form id="formCheckResult">
+            <input type="text" placeholder="Masukkan NISN" required>
+            <button type="submit">Cek Hasil</button>
+        </form>
+        <div id="resultInfo" style="margin-top:1rem;"></div>
     </section>
-  </div>
+</div>
 
-  <script>
-    function login() {
-      const user = document.getElementById("username").value;
-      const pass = document.getElementById("password").value;
-      if (user === "admin" && pass === "123") {
-        document.getElementById("loginPage").style.display = "none";
-        document.getElementById("mainApp").style.display = "block";
-        showPage("home");
-      } else {
-        alert("Username atau password salah!");
-      }
+<script>
+    function showPage(page) {
+        document.querySelectorAll('section').forEach(section => section.classList.remove('active'));
+        document.getElementById(page).classList.add('active');
     }
 
-    function logout() {
-      document.getElementById("mainApp").style.display = "none";
-      document.getElementById("loginPage").style.display = "block";
-    }
-
-    function showPage(id) {
-      const pages = ["home", "info", "register", "result"];
-      pages.forEach(page => {
-        document.getElementById(page).classList.remove("active");
-      });
-      document.getElementById(id).classList.add("active");
-    }
-
-    function submitForm() {
-      const nama = document.getElementById("nama").value;
-      const nisn = document.getElementById("nisn").value;
-      const jurusan = document.getElementById("jurusan").value;
-
-      if (!nama || !nisn || !jurusan) {
-        alert("Mohon isi semua data!");
-        return;
-      }
-
-      const hasil = `
-        <p><strong>Nama:</strong> ${nama}</p>
-        <p><strong>NISN:</strong> ${nisn}</p>
-        <p><strong>Jurusan Pilihan:</strong> ${jurusan}</p>
-        <p><strong>Status:</strong> Menunggu Verifikasi</p>
-      `;
-      document.getElementById("hasilPendaftaran").innerHTML = hasil;
-      showPage('result');
-    }
-  </script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const user = document.getElementById('username').value;
+        const pass = document.getElementById('password').value;
+        if (user === 'admin' && pass === '1234') {
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'block';
+        } else {
+            alert('Login gagal. Username atau password salah.');
+        }
+    });
+</script>
 </body>
 </html>
