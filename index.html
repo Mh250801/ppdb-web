@@ -8,115 +8,99 @@
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
-      background: #eef7f8;
+      background-color: #f9f9f9;
       color: #333;
     }
-
     header {
-      background-color: #0a74da;
-      color: white;
-      padding: 1.5rem;
+      background-color: #007bff;
+      color: #fff;
+      padding: 20px;
       text-align: center;
-      font-size: 1.8rem;
+      font-size: 24px;
       font-weight: bold;
     }
-
-    main {
-      max-width: 600px;
-      margin: 2rem auto;
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-    }
-
-    h2 {
-      color: #0a74da;
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
-
-    .katalog {
+    nav {
       display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
+      justify-content: center;
+      background-color: #e9ecef;
+      padding: 10px;
     }
-
-    .katalog-item {
-      background: #f8f9fb;
-      padding: 1rem 1.5rem;
-      border-radius: 10px;
-      border-left: 6px solid #0a74da;
-    }
-
-    .katalog-item h3 {
-      margin: 0 0 0.5rem;
-      font-size: 1.1rem;
-      color: #0a74da;
-    }
-
-    .katalog-item.closed {
-      opacity: 0.6;
-    }
-
-    .biaya {
-      margin-top: 1.5rem;
-    }
-
-    .biaya p {
-      margin: 0.4rem 0;
-    }
-
-    .button {
-      background-color: #0a74da;
-      color: white;
-      text-align: center;
-      padding: 0.8rem;
-      margin-top: 1rem;
-      border-radius: 8px;
-      font-weight: bold;
+    nav button {
+      background-color: transparent;
+      border: none;
+      margin: 0 10px;
+      font-size: 16px;
+      padding: 10px 20px;
       cursor: pointer;
-      transition: background-color 0.2s;
-      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    nav button:hover {
+      background-color: #d4d4d4;
+    }
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    .page {
+      display: none;
+    }
+    .page.active {
       display: block;
     }
-
-    .button:hover {
-      background-color: #085cb3;
+    input, select {
+      padding: 10px;
+      margin-top: 10px;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
     }
-
-    .footer {
-      text-align: center;
-      margin-top: 2rem;
-      color: #888;
-      font-size: 0.9rem;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
     label {
+      display: block;
+      margin-top: 20px;
       font-weight: 500;
     }
-
-    input, select {
-      padding: 0.6rem;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
+    button.submit {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      margin-top: 20px;
+      border-radius: 5px;
+      cursor: pointer;
     }
-
-    .hasil {
-      text-align: center;
-      font-size: 1.1rem;
-      line-height: 1.6;
+    .katalog {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
     }
-
-    .bold {
+    .gelombang-box {
+      padding: 20px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      background-color: #f5f5f5;
+    }
+    .gelombang-box h3 {
+      margin: 0 0 10px 0;
+    }
+    .status-tutup {
+      color: red;
       font-weight: bold;
+    }
+    .status-buka {
+      color: green;
+      font-weight: bold;
+    }
+    footer {
+      text-align: center;
+      font-size: 14px;
+      color: #888;
+      margin: 40px 0 20px;
     }
   </style>
 </head>
@@ -124,93 +108,105 @@
 
 <header>PPDB Online 2025</header>
 
-<main id="home">
-  <h2>Info Pendaftaran</h2>
-  <div class="katalog">
-    <div class="katalog-item closed">
-      <h3>Gelombang 1 (DITUTUP)</h3>
-      <p>Tanggal: <span class="bold">1–30 Juni</span></p>
-    </div>
-    <div class="katalog-item">
-      <h3>Gelombang 2</h3>
-      <p>Tanggal: <span class="bold">1–31 Juli</span></p>
+<nav>
+  <button onclick="showPage('homePage')">Beranda</button>
+  <button onclick="showPage('infoPage')">Informasi</button>
+  <button onclick="showPage('registerPage')">Registrasi</button>
+  <button onclick="showPage('loginPage')">Login</button>
+  <button onclick="showPage('hasilPage')">Hasil</button>
+</nav>
+
+<div class="container">
+
+  <div id="homePage" class="page active">
+    <h2>Selamat datang di PPDB Online</h2>
+    <p>Silakan gunakan menu navigasi di atas untuk mendaftar, melihat informasi, atau memeriksa hasil seleksi.</p>
+  </div>
+
+  <div id="infoPage" class="page">
+    <h2>Informasi Gelombang</h2>
+    <div class="katalog">
+      <div class="gelombang-box">
+        <h3>Gelombang 1</h3>
+        <p>Pendaftaran: 1 Juni – 30 Juni 2025</p>
+        <p>Pengumuman: 5 Juli 2025</p>
+        <p class="status-tutup">Status: Ditutup</p>
+      </div>
+      <div class="gelombang-box">
+        <h3>Gelombang 2</h3>
+        <p>Pendaftaran: 10 Juli – 25 Agustus 2025</p>
+        <p>Pengumuman: 1 September 2025</p>
+        <p class="status-buka">Status: Dibuka</p>
+      </div>
     </div>
   </div>
 
-  <div class="biaya">
-    <p>Biaya jurusan IPA: <span class="bold">Rp 1.000.000</span></p>
-    <p>Biaya jurusan IPS: <span class="bold">Rp 900.000</span></p>
+  <div id="registerPage" class="page">
+    <h2>Formulir Registrasi</h2>
+    <form id="registerForm">
+      <label for="nama">Nama Lengkap</label>
+      <input type="text" id="nama" name="nama" required>
+
+      <label for="nisn">NISN</label>
+      <input type="text" id="nisn" name="nisn" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="gelombang">Pilih Gelombang</label>
+      <select id="gelombang" name="gelombang" required>
+        <option value="">-- Pilih Gelombang --</option>
+        <option value="Gelombang 2">Gelombang 2</option>
+      </select>
+
+      <button type="submit" class="submit">Kirim Pendaftaran</button>
+    </form>
   </div>
 
-  <a href="#formulir" class="button">Formulir Pendaftaran</a>
-</main>
+  <div id="loginPage" class="page">
+    <h2>Login Pendaftar</h2>
+    <form id="loginForm">
+      <label for="loginNisn">NISN</label>
+      <input type="text" id="loginNisn" name="loginNisn" required>
 
-<main id="formulir">
-  <h2>Formulir Pendaftaran</h2>
-  <form id="formPendaftaran">
-    <label for="nama">Nama Lengkap</label>
-    <input type="text" id="nama" required />
+      <label for="loginEmail">Email</label>
+      <input type="email" id="loginEmail" name="loginEmail" required>
 
-    <label for="nisn">NISN</label>
-    <input type="text" id="nisn" required />
+      <button type="submit" class="submit">Login</button>
+    </form>
+  </div>
 
-    <label for="email">Email</label>
-    <input type="email" id="email" required />
+  <div id="hasilPage" class="page">
+    <h2>Hasil Seleksi</h2>
+    <p>Masukkan NISN dan Email di halaman login untuk melihat hasil seleksi Anda.</p>
+  </div>
 
-    <label for="jurusan">Pilih Jurusan</label>
-    <select id="jurusan" required>
-      <option value="">-- Pilih Jurusan --</option>
-      <option value="IPA">IPA</option>
-      <option value="IPS">IPS</option>
-    </select>
-
-    <label for="gelombang">Pilih Gelombang</label>
-    <select id="gelombang" required>
-      <option value="">-- Pilih Gelombang --</option>
-      <option value="Gelombang 2">Gelombang 2</option>
-    </select>
-
-    <button type="submit" class="button">Kirim</button>
-  </form>
-</main>
-
-<main id="hasil" style="display:none;">
-  <h2>Pendaftaran Berhasil!</h2>
-  <div class="hasil" id="outputData"></div>
-  <a href="#home" class="button">Kembali ke Beranda</a>
-</main>
-
-<div class="footer">
-  © 2025 PPDB Online | Kelas Khusus <span style="color:#f9b233; font-weight:bold;">IMK</span>
 </div>
 
+<footer>
+  &copy; 2025 PPDB Online - Seluruh hak cipta dilindungi.
+</footer>
+
 <script>
-  const form = document.getElementById("formPendaftaran");
-  const hasil = document.getElementById("hasil");
-  const formulir = document.getElementById("formulir");
-  const output = document.getElementById("outputData");
+  function showPage(pageId) {
+    const pages = document.querySelectorAll('.page');
+    pages.forEach(page => {
+      page.classList.remove('active');
+    });
+    document.getElementById(pageId).classList.add('active');
+  }
 
-  form.addEventListener("submit", function (e) {
+  document.getElementById('registerForm').addEventListener('submit', function(e) {
     e.preventDefault();
+    alert('Pendaftaran berhasil dikirim!');
+    showPage('homePage');
+    this.reset();
+  });
 
-    const nama = document.getElementById("nama").value;
-    const nisn = document.getElementById("nisn").value;
-    const email = document.getElementById("email").value;
-    const jurusan = document.getElementById("jurusan").value;
-    const gelombang = document.getElementById("gelombang").value;
-    const biaya = jurusan === "IPA" ? "Rp 1.000.000" : "Rp 900.000";
-
-    output.innerHTML = `
-      <p>Terima kasih <span class="bold">${nama}</span>!</p>
-      <p>Data kamu telah tercatat dengan NISN <span class="bold">${nisn}</span>.</p>
-      <p>Email: ${email}</p>
-      <p>Jurusan: <span class="bold">${jurusan}</span></p>
-      <p>Gelombang: <span class="bold">${gelombang}</span></p>
-      <p>Total biaya pendaftaran: <span class="bold">${biaya}</span></p>
-    `;
-
-    formulir.style.display = "none";
-    hasil.style.display = "block";
+  document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Login berhasil. Fitur hasil seleksi belum diaktifkan.');
+    showPage('hasilPage');
   });
 </script>
 
