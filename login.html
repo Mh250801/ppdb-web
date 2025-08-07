@@ -2,12 +2,14 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Akun</title>
+    <title>Login</title>
 </head>
 <body>
-    <h2>Login Akun PPDB</h2>
-    <form action="/login" method="post">
+    <h2>Login Akun</h2>
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
+    <form method="POST" action="/login">
         <label>Username:</label><br>
         <input type="text" name="username" required><br><br>
 
@@ -16,6 +18,6 @@
 
         <input type="submit" value="Login">
     </form>
-    <p>Belum punya akun? <a href="/register">Daftar di sini</a></p>
+    <p>Belum punya akun? <a href="/register">Registrasi di sini</a></p>
 </body>
 </html>
