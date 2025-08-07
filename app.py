@@ -1,66 +1,54 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect
 import csv
 import os
 
 app = Flask(__name__)
 
 @app.route('/')
-def home():
-    return redirect(url_for('login'))
+def index():
+    return redirect('/register')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         nama = request.form['nama']
         email = request.form['email']
-        no_hp = request.form['no_hp']
         alamat = request.form['alamat']
-        gelombang = request.form['gelombang']
         username = request.form['username']
         password = request.form['password']
 
-        # Simpan data ke file.csv
+        # Simpan ke file.csv (data siswa)
         with open('file.csv', mode='a', newline='', encoding='utf-8') as f:
             writer = csv.writer(f)
-            writer.writerow([nama, email, no_hp, alamat, gelombang])
+            writer.writerow([nama, email, alamat])
 
-        # Simpan username dan password ke file1.csv
-        with open('file1.csv', mode='a', newline='', encoding='utf-8') as f:
-            writer = csv.writer(f)
+        # Simpan ke file1.csv (akun)
+        with open('file1.csv', mode='a', newline='', encoding='utf-8') as f1:
+            writer = csv.writer(f1)
             writer.writerow([username, password])
 
-        return redirect(url_for('login'))
+        return redirect('/login')
+    
     return render_template('register.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    error = ''
     if request.method == 'POST':
-        username_input = request.form['username']
-        password_input = request.form['password']
+        username = request.form['username']
+        password = request.form['password']
 
-        with open('file1.csv', newline='', encoding='utf-8') as f:
-            reader = csv.reader(f)
-            for row in reader:
-                if row[0] == username_input and row[1] == password_input:
-                    return redirect(url_for('dashboard'))
-            error = 'Username atau Password salah!'
-    return render_template('login.html', error=error)
+        try:
+            with open('file1.csv', mode='r', encoding='utf-8') as f:
+                reader = csv.reader(f)
+                for row in reader:
+                    if row == [username, password]:
+                        return f"<h2>Login berhasil! Selamat datang, {username}.</h2>"
+        except FileNotFoundError:
+            return "<h2>Data akun belum tersedia.</h2>"
 
-@app.route('/dashboard')
-def dashboard():
-    return render_template('index.html')
+        return "<h2>Login gagal! Username atau password salah.</h2>"
+    
+    return render_template('login.html')
 
 if __name__ == '__main__':
-    # Buat file jika belum ada
-    if not os.path.exists('file.csv'):
-        with open('file.csv', 'w', newline='', encoding='utf-8') as f:
-            writer = csv.writer(f)
-            writer.writerow(['Nama', 'Email', 'No HP', 'Alamat', 'Gelombang'])
-
-    if not os.path.exists('file1.csv'):
-        with open('file1.csv', 'w', newline='', encoding='utf-8') as f:
-            writer = csv.writer(f)
-            writer.writerow(['Username', 'Password'])
-
     app.run(debug=True)
