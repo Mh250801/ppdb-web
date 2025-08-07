@@ -1,280 +1,227 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PPDB Online</title>
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #f4f6f9;
-            margin: 0;
-            padding: 0;
-            color: #333;
-        }
-
-        header {
-            background-color: #0055a5;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        nav {
-            background-color: #0073e6;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 10px 0;
-            flex-wrap: wrap;
-        }
-
-        nav button {
-            background-color: #ffffff;
-            border: none;
-            padding: 10px 20px;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        nav button:hover {
-            background-color: #e0e0e0;
-        }
-
-        main {
-            padding: 20px;
-            max-width: 800px;
-            margin: auto;
-        }
-
-        section {
-            display: none;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            margin-top: 20px;
-        }
-
-        section.active {
-            display: block;
-        }
-
-        h2 {
-            border-bottom: 2px solid #eee;
-            padding-bottom: 5px;
-            color: #0055a5;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            font-weight: 600;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-        }
-
-        .katalog {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .gelombang {
-            flex: 1 1 300px;
-            background-color: #f0f4ff;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 5px solid #0073e6;
-        }
-
-        .gelombang.closed {
-            opacity: 0.6;
-            border-left: 5px solid #ccc;
-        }
-
-        .gelombang h3 {
-            margin-top: 0;
-        }
-
-        .btn-submit {
-            background-color: #0073e6;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            font-size: 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .btn-submit:hover {
-            background-color: #005bb5;
-        }
-
-        .result-box {
-            background-color: #e0f7fa;
-            padding: 15px;
-            border-radius: 6px;
-            margin-top: 10px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 10px;
-            color: #666;
-            margin-top: 40px;
-        }
-
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PPDB Online</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f8;
+      color: #333;
+    }
+    header {
+      background-color: #1a73e8;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #e0e0e0;
+      padding: 10px;
+      gap: 10px;
+    }
+    nav button {
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    nav button:hover {
+      background-color: #d3e3fc;
+    }
+    section {
+      padding: 20px;
+      display: none;
+    }
+    .active {
+      display: block;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+    }
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .btn-submit {
+      background-color: #1a73e8;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .btn-submit:hover {
+      background-color: #0f5fd1;
+    }
+    .katalog {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .gelombang {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      flex: 1;
+      min-width: 300px;
+    }
+    .gelombang h3 {
+      margin-bottom: 10px;
+    }
+    .closed {
+      color: red;
+      font-weight: bold;
+    }
+    .open {
+      color: green;
+      font-weight: bold;
+    }
+    #loginPage {
+      display: block;
+      padding: 50px 20px;
+      max-width: 400px;
+      margin: auto;
+    }
+  </style>
 </head>
 <body>
 
-<header>
-    <h1>PPDB Online SMK Contoh</h1>
-</header>
+  <section id="loginPage">
+    <h2>Login PPDB</h2>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username">
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password">
+    </div>
+    <button class="btn-submit" onclick="login()">Login</button>
+  </section>
 
-<nav>
-    <button onclick="showPage('homePage')">Beranda</button>
-    <button onclick="showPage('infoPage')">Informasi</button>
-    <button onclick="showPage('registerPage')">Registrasi</button>
-    <button onclick="showPage('loginPage')">Login</button>
-    <button onclick="showPage('resultPage')">Hasil</button>
-</nav>
+  <div id="mainApp" style="display:none;">
+    <header>PPDB Online - SMK Contoh</header>
+    <nav>
+      <button onclick="showPage('home')">Beranda</button>
+      <button onclick="showPage('info')">Info</button>
+      <button onclick="showPage('register')">Registrasi</button>
+      <button onclick="showPage('result')">Hasil</button>
+      <button onclick="logout()">Logout</button>
+    </nav>
 
-<main>
-    <!-- Beranda -->
-    <section id="homePage" class="active">
-        <h2>Selamat Datang</h2>
-        <p>Selamat datang di portal Penerimaan Peserta Didik Baru (PPDB) Online SMK Contoh. Silakan pilih menu di atas untuk melanjutkan.</p>
+    <section id="home" class="active">
+      <h2>Selamat Datang di PPDB Online</h2>
+      <p>Silakan pilih menu di atas untuk mulai menggunakan aplikasi ini.</p>
     </section>
 
-    <!-- Informasi -->
-    <section id="infoPage">
-        <h2>Informasi PPDB</h2>
-        <div class="katalog">
-            <div class="gelombang closed">
-                <h3>Gelombang 1</h3>
-                <p><strong>Status:</strong> Ditutup</p>
-                <p><strong>Tanggal:</strong> 1 Juli – 15 Juli 2025</p>
-                <p><strong>Kuota:</strong> 100 siswa</p>
-                <p><strong>Biaya Pendaftaran:</strong> Rp 150.000</p>
-            </div>
-            <div class="gelombang">
-                <h3>Gelombang 2</h3>
-                <p><strong>Status:</strong> Dibuka</p>
-                <p><strong>Tanggal:</strong> 16 Juli – 31 Juli 2025</p>
-                <p><strong>Kuota:</strong> 50 siswa</p>
-                <p><strong>Biaya Pendaftaran:</strong> Rp 150.000</p>
-            </div>
+    <section id="info">
+      <h2>Informasi Pendaftaran</h2>
+      <div class="katalog">
+        <div class="gelombang">
+          <h3>Gelombang 1</h3>
+          <p>Pendaftaran: 1 - 15 Juli 2025</p>
+          <p class="closed">Status: Ditutup</p>
         </div>
-    </section>
-
-    <!-- Registrasi -->
-    <section id="registerPage">
-        <h2>Formulir Registrasi</h2>
-        <form id="registerForm" onsubmit="handleRegister(event)">
-            <div class="form-group">
-                <label>Nama Lengkap</label>
-                <input type="text" required>
-            </div>
-            <div class="form-group">
-                <label>NISN</label>
-                <input type="text" required>
-            </div>
-            <div class="form-group">
-                <label>Asal Sekolah</label>
-                <input type="text" required>
-            </div>
-            <div class="form-group">
-                <label>Alamat</label>
-                <input type="text" required>
-            </div>
-            <div class="form-group">
-                <label>Jurusan Pilihan</label>
-                <select required>
-                    <option value="">-- Pilih --</option>
-                    <option value="RPL">Rekayasa Perangkat Lunak</option>
-                    <option value="TKJ">Teknik Komputer dan Jaringan</option>
-                    <option value="AKL">Akuntansi dan Keuangan Lembaga</option>
-                </select>
-            </div>
-            <button type="submit" class="btn-submit">Daftar</button>
-        </form>
-    </section>
-
-    <!-- Login -->
-    <section id="loginPage">
-        <h2>Login Pendaftar</h2>
-        <form onsubmit="handleLogin(event)">
-            <div class="form-group">
-                <label>NISN</label>
-                <input type="text" required>
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" required>
-            </div>
-            <button type="submit" class="btn-submit">Masuk</button>
-        </form>
-    </section>
-
-    <!-- Hasil -->
-    <section id="resultPage">
-        <h2>Cek Hasil Seleksi</h2>
-        <form onsubmit="handleResult(event)">
-            <div class="form-group">
-                <label>Masukkan NISN Anda</label>
-                <input type="text" required>
-            </div>
-            <button type="submit" class="btn-submit">Cek Hasil</button>
-        </form>
-        <div id="resultBox" class="result-box" style="display:none;">
-            <p><strong>Selamat!</strong> Anda dinyatakan <span style="color:green;">LULUS</span> pada jurusan <strong>Rekayasa Perangkat Lunak</strong>.</p>
+        <div class="gelombang">
+          <h3>Gelombang 2</h3>
+          <p>Pendaftaran: 16 - 31 Juli 2025</p>
+          <p class="open">Status: Dibuka</p>
         </div>
+      </div>
     </section>
-</main>
 
-<footer>
-    &copy; 2025 PPDB SMK Contoh. All rights reserved.
-</footer>
+    <section id="register">
+      <h2>Formulir Registrasi</h2>
+      <div class="form-group">
+        <label for="nama">Nama Lengkap</label>
+        <input type="text" id="nama">
+      </div>
+      <div class="form-group">
+        <label for="nisn">NISN</label>
+        <input type="text" id="nisn">
+      </div>
+      <div class="form-group">
+        <label for="jurusan">Jurusan Pilihan</label>
+        <select id="jurusan">
+          <option value="TKJ">TKJ</option>
+          <option value="RPL">RPL</option>
+          <option value="MM">MM</option>
+        </select>
+      </div>
+      <button class="btn-submit" onclick="submitForm()">Kirim</button>
+    </section>
 
-<script>
+    <section id="result">
+      <h2>Hasil Pendaftaran</h2>
+      <p id="hasilPendaftaran">Belum ada data pendaftaran.</p>
+    </section>
+  </div>
+
+  <script>
+    function login() {
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+      if (user === "admin" && pass === "123") {
+        document.getElementById("loginPage").style.display = "none";
+        document.getElementById("mainApp").style.display = "block";
+        showPage("home");
+      } else {
+        alert("Username atau password salah!");
+      }
+    }
+
+    function logout() {
+      document.getElementById("mainApp").style.display = "none";
+      document.getElementById("loginPage").style.display = "block";
+    }
+
     function showPage(id) {
-        document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
+      const pages = ["home", "info", "register", "result"];
+      pages.forEach(page => {
+        document.getElementById(page).classList.remove("active");
+      });
+      document.getElementById(id).classList.add("active");
     }
 
-    function handleRegister(event) {
-        event.preventDefault();
-        alert('Pendaftaran berhasil!');
-        showPage('homePage');
-    }
+    function submitForm() {
+      const nama = document.getElementById("nama").value;
+      const nisn = document.getElementById("nisn").value;
+      const jurusan = document.getElementById("jurusan").value;
 
-    function handleLogin(event) {
-        event.preventDefault();
-        alert('Login berhasil!');
-    }
+      if (!nama || !nisn || !jurusan) {
+        alert("Mohon isi semua data!");
+        return;
+      }
 
-    function handleResult(event) {
-        event.preventDefault();
-        document.getElementById('resultBox').style.display = 'block';
+      const hasil = `
+        <p><strong>Nama:</strong> ${nama}</p>
+        <p><strong>NISN:</strong> ${nisn}</p>
+        <p><strong>Jurusan Pilihan:</strong> ${jurusan}</p>
+        <p><strong>Status:</strong> Menunggu Verifikasi</p>
+      `;
+      document.getElementById("hasilPendaftaran").innerHTML = hasil;
+      showPage('result');
     }
-</script>
-
+  </script>
 </body>
 </html>
