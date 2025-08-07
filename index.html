@@ -2,10 +2,29 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Beranda</title>
+    <title>Data Pendaftar</title>
 </head>
 <body>
-    <h1>Selamat Datang di PPDB Online</h1>
-    <p>Informasi dan pendaftaran gelombang tersedia di sini.</p>
+    <h2>Halo, {{ username }}!</h2>
+    <p><a href="/logout">Logout</a></p>
+    <h3>Data Seluruh Pendaftar:</h3>
+    <table border="1">
+        <tr>
+            <th>Nama</th>
+            <th>Username</th>
+            <th>Kelas</th>
+            <th>Alamat</th>
+            <th>Email</th>
+        </tr>
+        {% for row in data %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+            <td>{{ row[4] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
 </body>
 </html>
